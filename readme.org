@@ -1,0 +1,6 @@
+* filigree
+** Requirements
+$\LaTeX$ packages:
+#+begin_src shell
+tlmgr install tikz
+#+end_src

@@ -4,19 +4,12 @@
 \usepackage{xparse}
 \usepackage{adjustbox}
 
-\input{corner_metadata.tex}
-
-%% \newcommand{\getcornermeta}[2]{%
-%%   \csname cornermetadata@#1@#2\endcsname
-%% }
+\input{./corner_metadata.tex}
 
 \NewDocumentCommand{\framedbox}{ O{} m }{%
 
   \begin{tikzpicture}
     \pgfkeys{/framedbox/.cd, #1} % Set the keys based on the optional argument
-    %% \pgfmathsetmacro{\fbwidth}{\framedboxwidth}
-    %% \pgfmathsetmacro{\fbheight}{\framedboxheight}
-    %% \pgfmathsetmacro{\fbcornersize}{\framedboxcornersize}
 
     \coordinate (northwest) at (0, \fbheight);
     \coordinate (northeast) at (\fbwidth, \fbheight);
@@ -28,29 +21,50 @@
     \def\swcorner{\fbcorner}
     \def\secorner{\fbcorner}
 
-    \node[anchor=north west, inner sep=0pt, xshift={-
-        \fbcornersize *
-        \getcornermeta{\fbcorner}{offsetx} /
-        \getcornermeta{\fbcorner}{width}},
-      yshift={-
-        \fbcornersize *
-        \getcornermeta{\fbcorner}{offsety} /
-        \getcornermeta{\fbcorner}{width}}]
+    \def\offsetx{\fbcornersize * \getcornermeta{\fbcorner}{offsetx} /
+        \getcornermeta{\fbcorner}{width}}
+    \def\offsety{\fbcornersize * \getcornermeta{\fbcorner}{offsety} /
+        \getcornermeta{\fbcorner}{width}}
+    \def\extrax{\fbcornersize * \getcornermeta{\fbcorner}{extrax} /
+        \getcornermeta{\fbcorner}{width}}
+    \def\extray{\fbcornersize * \getcornermeta{\fbcorner}{extray} /
+        \getcornermeta{\fbcorner}{width}}
+
+    \node[anchor=north west, inner sep=0pt]
     (cornernorthwest) at (northwest)
          {\includegraphics[width=\fbcornersize, height=\fbcornersize]{\nwcorner}};
-    \node[anchor=north east, inner sep=0pt] at (northeast)
+    \node[anchor=north east, inner sep=0pt]
+    (cornernortheast) at (northeast)
          {\adjustbox{scale={-1}{1}}{\includegraphics[width=\fbcornersize, height=\fbcornersize]{\necorner}}};
-    \node[anchor=south west, inner sep=0pt] at (southwest)
+    \node[anchor=south west, inner sep=0pt]
+    (cornersouthwest)at (southwest)
          {\adjustbox{scale={1}{-1}}{\includegraphics[width=\fbcornersize, height=\fbcornersize]{\swcorner}}};
-    \node[anchor=south east, inner sep=0pt] at (southeast)
+    \node[anchor=south east, inner sep=0pt]
+    (cornersoutheast)at (southeast)
          {\adjustbox{scale={-1}{-1}}{\includegraphics[width=\fbcornersize, height=\fbcornersize]{\secorner}}};
 
-    \draw[line width=0.06mm] ([xshift=-0.1mm, yshift=-0.115mm] cornernorthwest.north east) -- (northeast); % Top
-    \draw (southwest) -- (southeast); % Bottom
-    \draw (southwest) -- (northwest); % Left
-    \draw (southeast) -- (northeast); % Right
+    \def\linetopthickness{\fbcornersize * \getcornermeta{\fbcorner}{linetopthickness} /
+        \getcornermeta{\fbcorner}{width}}
+    \def\lineleftthickness{\fbcornersize * \getcornermeta{\fbcorner}{lineleftthickness} /
+        \getcornermeta{\fbcorner}{width}}
 
-   % \node (content) at (\fbwidth/2, \fbheight/2) {\parbox{\fbwidth}{\centering #2}};
+    \draw[line width={\linetopthickness}] ([yshift={- \offsety -
+        \linetopthickness}, xshift={- \extrax}] cornernorthwest.north east) --
+    ([yshift={- \offsety - \linetopthickness}, xshift={\extrax}] cornernortheast.north west);
+
+    \draw[line width={\linetopthickness}] ([yshift={\offsety +
+        \linetopthickness}, xshift={- \extrax}] cornersouthwest.south east) --
+    ([yshift={\offsety + \linetopthickness}, xshift={\extrax}] cornersoutheast.south west);
+
+    \draw[line width={\linetopthickness}] ([yshift={\extray}, xshift={\offsetx
+        + \lineleftthickness}] cornernorthwest.south west) --
+    ([yshift={- \extray}, xshift={\offsetx + \lineleftthickness}] cornersouthwest.north west);
+
+    \draw[line width={\linetopthickness}] ([yshift={\extray}, xshift={- \offsetx
+        - \lineleftthickness}] cornernortheast.south east) --
+    ([yshift={- \extray}, xshift={- \offsetx - \lineleftthickness}] cornersoutheast.north east);
+
+    \node (content) at (\fbwidth/2, \fbheight/2) {\parbox{\fbwidth}{\centering #2}};
   \end{tikzpicture}
 }
 
@@ -65,19 +79,8 @@
   corner=corner
 }
 
-\def\cornermetadata@corner@offsetx{23}
-
-\newcommand{\getcornermeta}[2]{%
-  \csname cornermetadata@#1@#2\endcsname
-}
-
 \begin{document}
 
-The offset-x value for corner is: \getcornermeta{corner}{offsetx}.
+\framedbox[width=6cm, height=4cm, cornersize=1cm]{This is some sample content within the box.}
 
 \end{document}
-%% \begin{document}
-%% Hi.\  \getcornermeta{corner}{width} oi
-%% %% \framedbox[width=6cm, height=4cm, cornersize=0.7cm]{This is some sample content within the box.}
-
-%% \end{document}

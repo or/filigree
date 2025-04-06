@@ -1,5 +1,11 @@
-\def\cornermetadata@corner@offsetx{23}
-\def\cornermetadata@corner@offsety{1}
-\def\cornermetadata@corner@linetopthickness{8}
-\def\cornermetadata@corner@lineleftthickness{9}
-\def\cornermetadata@corner@width{700}
+\newcommand{\getcornermeta}[2]{%
+  \csname cornermetadataX#1X#2\endcsname
+}
+
+\def\cornermetadataXcornerXoffsetx{24}
+\def\cornermetadataXcornerXoffsety{1.8}
+\def\cornermetadataXcornerXlinetopthickness{9}
+\def\cornermetadataXcornerXlineleftthickness{9}
+\def\cornermetadataXcornerXwidth{750}
+\def\cornermetadataXcornerXextrax{10}
+\def\cornermetadataXcornerXextray{13}
