@@ -1,0 +1,83 @@
+\documentclass{apa6}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{xparse}
+\usepackage{adjustbox}
+
+\input{corner_metadata.tex}
+
+%% \newcommand{\getcornermeta}[2]{%
+%%   \csname cornermetadata@#1@#2\endcsname
+%% }
+
+\NewDocumentCommand{\framedbox}{ O{} m }{%
+
+  \begin{tikzpicture}
+    \pgfkeys{/framedbox/.cd, #1} % Set the keys based on the optional argument
+    %% \pgfmathsetmacro{\fbwidth}{\framedboxwidth}
+    %% \pgfmathsetmacro{\fbheight}{\framedboxheight}
+    %% \pgfmathsetmacro{\fbcornersize}{\framedboxcornersize}
+
+    \coordinate (northwest) at (0, \fbheight);
+    \coordinate (northeast) at (\fbwidth, \fbheight);
+    \coordinate (southwest) at (0, 0);
+    \coordinate (southeast) at (\fbwidth, 0);
+
+    \def\nwcorner{\fbcorner}
+    \def\necorner{\fbcorner}
+    \def\swcorner{\fbcorner}
+    \def\secorner{\fbcorner}
+
+    \node[anchor=north west, inner sep=0pt, xshift={-
+        \fbcornersize *
+        \getcornermeta{\fbcorner}{offsetx} /
+        \getcornermeta{\fbcorner}{width}},
+      yshift={-
+        \fbcornersize *
+        \getcornermeta{\fbcorner}{offsety} /
+        \getcornermeta{\fbcorner}{width}}]
+    (cornernorthwest) at (northwest)
+         {\includegraphics[width=\fbcornersize, height=\fbcornersize]{\nwcorner}};
+    \node[anchor=north east, inner sep=0pt] at (northeast)
+         {\adjustbox{scale={-1}{1}}{\includegraphics[width=\fbcornersize, height=\fbcornersize]{\necorner}}};
+    \node[anchor=south west, inner sep=0pt] at (southwest)
+         {\adjustbox{scale={1}{-1}}{\includegraphics[width=\fbcornersize, height=\fbcornersize]{\swcorner}}};
+    \node[anchor=south east, inner sep=0pt] at (southeast)
+         {\adjustbox{scale={-1}{-1}}{\includegraphics[width=\fbcornersize, height=\fbcornersize]{\secorner}}};
+
+    \draw[line width=0.06mm] ([xshift=-0.1mm, yshift=-0.115mm] cornernorthwest.north east) -- (northeast); % Top
+    \draw (southwest) -- (southeast); % Bottom
+    \draw (southwest) -- (northwest); % Left
+    \draw (southeast) -- (northeast); % Right
+
+   % \node (content) at (\fbwidth/2, \fbheight/2) {\parbox{\fbwidth}{\centering #2}};
+  \end{tikzpicture}
+}
+
+\pgfkeys{/framedbox/.cd,
+  width/.store in=\fbwidth,
+  width=5cm, % Default width
+  height/.store in=\fbheight,
+  height=4cm, % Default height
+  cornersize/.store in=\fbcornersize,
+  cornersize=0.5cm,
+  corner/.store in=\fbcorner,
+  corner=corner
+}
+
+\def\cornermetadata@corner@offsetx{23}
+
+\newcommand{\getcornermeta}[2]{%
+  \csname cornermetadata@#1@#2\endcsname
+}
+
+\begin{document}
+
+The offset-x value for corner is: \getcornermeta{corner}{offsetx}.
+
+\end{document}
+%% \begin{document}
+%% Hi.\  \getcornermeta{corner}{width} oi
+%% %% \framedbox[width=6cm, height=4cm, cornersize=0.7cm]{This is some sample content within the box.}
+
+%% \end{document}
