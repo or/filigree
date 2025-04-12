@@ -1,6 +1,19 @@
 * filigree
 ** Requirements
-$\LaTeX$ packages:
-#+begin_src shell
-tlmgr install tikz
-#+end_src
+Required $\LaTeX$ packages:
+- ~tikz~ and its ~calc~ library
+- ~graphicx~
+- ~xparse~
+- ~adjustbox~
+- ~ifthen~
+
+** Usage
+TBD
+
+** Attribution
+I've found various corners online, but that was quite a while ago. The
+majority appear to be by [[http://www.freepik.com][designed by callmetak / Freepik]]. They are free for
+use, but see the license on that site for details.
+
+If you know the source for other corners, then please let me know, so I can
+properly attribute them as well.
