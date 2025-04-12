@@ -168,8 +168,12 @@
     }
     {}
 
-    \node (content) at (\fbwidth/2, \fbheight/2)
-      {\parbox{\fbwidth}{\centering #2}};
+    \node[text width={\fbwidth-2*\fbpadding},
+      minimum height={\fbheight-2*\fbpadding},
+      inner sep=0pt,
+      align=center]
+    (content) at (\fbwidth/2, \fbheight/2) {#2};
+
  \end{tikzpicture}
 }
 
@@ -186,12 +190,15 @@
   mode=full,
   lines/.store in=\fblines,
   lines=all,
+  padding/.store in=\fbpadding,
+  padding=0,
 }
 
 \begin{document}
 \def\style{style35}
 
-\framedbox[width=5.5cm, height=5.5cm, corner=\style, cornersize=2.5cm, mode=full, lines=2]
+\framedbox[width=\textwidth, height=5.5cm, corner=\style, cornersize=2.5cm,
+   mode=full, lines=2, padding=0.5cm]
   {This is some sample content within the box.}
 
 \vspace{1cm}
