@@ -116,26 +116,29 @@
       ($(southwest) + (0, \offsety) + (0, 0.2pt)$);
     }
 
-    % top line
-    \draw[line width={\horizontallinethickness}]
-      ([yshift={- \offsety - \horizontallinethickness / 2 - 0.2pt}] toplinestart) --
-      ([yshift={- \offsety - \horizontallinethickness / 2 - 0.2pt}] toplineend);
+    \ifthenelse{\equal{\fblines}{all} \OR \equal{\fblines}{2} \OR \equal{\fblines}{1}}
+    {
+      % top line
+      \draw[line width={\horizontallinethickness}]
+        ([yshift={- \offsety - \horizontallinethickness / 2 - 0.2pt}] toplinestart) --
+        ([yshift={- \offsety - \horizontallinethickness / 2 - 0.2pt}] toplineend);
 
-    % bottom line
-    \draw[line width={\horizontallinethickness}]
-      ([yshift={\offsety + \horizontallinethickness / 2 + 0.2pt}] bottomlinestart) --
-      ([yshift={\offsety + \horizontallinethickness / 2 + 0.2pt}] bottomlineend);
+      % bottom line
+      \draw[line width={\horizontallinethickness}]
+        ([yshift={\offsety + \horizontallinethickness / 2 + 0.2pt}] bottomlinestart) --
+        ([yshift={\offsety + \horizontallinethickness / 2 + 0.2pt}] bottomlineend);
 
-    % left line
-    \draw[line width={\verticallinethickness}]
-      ([xshift={\offsetx + \verticallinethickness / 2 + 0.2pt}] leftlinestart) --
-      ([xshift={\offsetx + \verticallinethickness / 2 + 0.2pt}] leftlineend);
+      % left line
+      \draw[line width={\verticallinethickness}]
+        ([xshift={\offsetx + \verticallinethickness / 2 + 0.2pt}] leftlinestart) --
+        ([xshift={\offsetx + \verticallinethickness / 2 + 0.2pt}] leftlineend);
 
-    % right line
-    \draw[line width={\verticallinethickness}]
-      ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlinestart) --
-      ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlineend);
-
+      % right line
+      \draw[line width={\verticallinethickness}]
+        ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlinestart) --
+        ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlineend);
+    }
+    {}
 
     \ifthenelse{\NOT \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
     {
@@ -186,7 +189,7 @@
 }
 
 \begin{document}
-\def\style{style36}
+\def\style{style35}
 
 \framedbox[width=5.5cm, height=5.5cm, corner=\style, cornersize=2.5cm, mode=full, lines=2]
   {This is some sample content within the box.}
@@ -203,7 +206,7 @@
 
 \vspace{1cm}
 
-\framedbox[width=6cm, height=4cm, corner=\style, cornersize=1cm, mode=diagonal]
+\framedbox[width=6cm, height=4cm, corner=\style, cornersize=1cm, mode=diagonal, lines=2]
   {This is some sample content within the box.}
 
 \vspace{1cm}
