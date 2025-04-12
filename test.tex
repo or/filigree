@@ -23,25 +23,26 @@
     \def\swcorner{corners/\fbcorner.pdf}
     \def\secorner{corners/\fbcorner.pdf}
 
-    \def\offsetx
-      {\fbcornersize * \getcornermetadata{\fbcorner}{offsetx} /
-       \getcornermetadata{\fbcorner}{width}}
-    \def\offsety
-      {\fbcornersize * \getcornermetadata{\fbcorner}{offsety} /
-       \getcornermetadata{\fbcorner}{width}}
-    \def\extrax
-      {\fbcornersize * \getcornermetadata{\fbcorner}{extrax} /
-       \getcornermetadata{\fbcorner}{width}}
-    \def\extray
-      {\fbcornersize * \getcornermetadata{\fbcorner}{extray} /
-       \getcornermetadata{\fbcorner}{width}}
+    \def\factor{\fbcornersize / \getcornermetadata{\fbcorner}{width}}
 
-    \def\horizontallinethickness
-      {\fbcornersize * \getcornermetadata{\fbcorner}{horizontallinethickness} /
-       \getcornermetadata{\fbcorner}{width}}
-    \def\verticallinethickness
-      {\fbcornersize * \getcornermetadata{\fbcorner}{verticallinethickness} /
-       \getcornermetadata{\fbcorner}{width}}
+    \def\extrax{\factor * \getcornermetadata{\fbcorner}{extrax}}
+    \def\extray{\factor * \getcornermetadata{\fbcorner}{extray}}
+
+    \def\offsetx{\factor * \getcornermetadata{\fbcorner}{offsetx1}}
+    \def\offsety{\factor * \getcornermetadata{\fbcorner}{offsety1}}
+
+    \def\horizontallinethickness{\factor * \getcornermetadata{\fbcorner}{horizontallinethickness1}}
+    \def\verticallinethickness{\factor * \getcornermetadata{\fbcorner}{verticallinethickness1}}
+
+    \ifthenelse{\NOT \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+    {
+      \def\offsetxsecond{\factor * \getcornermetadata{\fbcorner}{offsetx2}}
+      \def\offsetysecond{\factor * \getcornermetadata{\fbcorner}{offsety2}}
+
+      \def\horizontallinethicknesssecond{\factor * \getcornermetadata{\fbcorner}{horizontallinethickness2}}
+      \def\verticallinethicknesssecond{\factor * \getcornermetadata{\fbcorner}{verticallinethickness2}}
+    }
+    {}
 
     \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{diagonal}}
     {
@@ -135,9 +136,37 @@
       ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlinestart) --
       ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlineend);
 
+
+    \ifthenelse{\NOT \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+    {
+      \ifthenelse{\equal{\fblines}{all} \OR \equal{\fblines}{2}}
+      {
+        % top line
+        \draw[line width={\horizontallinethicknesssecond}]
+          ([yshift={- \offsetysecond - \horizontallinethicknesssecond / 2 - 0.2pt}] toplinestart) --
+          ([yshift={- \offsetysecond - \horizontallinethicknesssecond / 2 - 0.2pt}] toplineend);
+
+        % bottom line
+        \draw[line width={\horizontallinethicknesssecond}]
+          ([yshift={\offsetysecond + \horizontallinethicknesssecond / 2 + 0.2pt}] bottomlinestart) --
+          ([yshift={\offsetysecond + \horizontallinethicknesssecond / 2 + 0.2pt}] bottomlineend);
+
+        % left line
+        \draw[line width={\verticallinethicknesssecond}]
+          ([xshift={\offsetxsecond + \verticallinethicknesssecond / 2 + 0.2pt}] leftlinestart) --
+          ([xshift={\offsetxsecond + \verticallinethicknesssecond / 2 + 0.2pt}] leftlineend);
+
+        % right line
+        \draw[line width={\verticallinethicknesssecond}]
+          ([xshift={- \offsetxsecond - \verticallinethicknesssecond / 2 - 0.2pt}] rightlinestart) --
+          ([xshift={- \offsetxsecond - \verticallinethicknesssecond / 2 - 0.2pt}] rightlineend);
+      }
+      {}
+    }
+    {}
+
     \node (content) at (\fbwidth/2, \fbheight/2)
-      {\parbox{\fbwidth}{\centering #2
-     }};
+      {\parbox{\fbwidth}{\centering #2}};
  \end{tikzpicture}
 }
 
@@ -152,17 +181,19 @@
   corner=style01,
   mode/.store in=\fbmode,
   mode=full,
+  lines/.store in=\fblines,
+  lines=all,
 }
 
 \begin{document}
-\def\style{style35}
+\def\style{style36}
 
-\framedbox[width=8cm, height=8cm, corner=\style, cornersize=3cm, mode=full]
+\framedbox[width=5.5cm, height=5.5cm, corner=\style, cornersize=2.5cm, mode=full, lines=2]
   {This is some sample content within the box.}
 
 \vspace{1cm}
 
-\framedbox[width=6cm, height=4cm, corner=\style, cornersize=1cm, mode=full]
+\framedbox[width=6cm, height=4cm, corner=\style, cornersize=1cm, mode=full, lines=1]
   {This is some sample content within the box.}
 
 \vspace{1cm}

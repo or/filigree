@@ -1,13 +1,21 @@
+% \newcommand{\getcornermetadata}[2]{%
+%       \pgfkeysvalueof{/cornermetadata/#1/#2}
+% }
+
 \newcommand{\getcornermetadata}[2]{%
-  \pgfkeysvalueof{/cornermetadata/#1/#2}%
+  \expandafter\ifx\csname pgfk@/cornermetadata/#1/#2\endcsname\relax%
+    0%
+  \else%
+    \pgfkeysvalueof{/cornermetadata/#1/#2}%
+  \fi
 }
 
 \pgfkeys{
   /cornermetadata/style01/.cd,
-  offsetx/.initial = 11.246,
-  offsety/.initial = 11.223,
-  horizontallinethickness/.initial = 19.515,
-  verticallinethickness/.initial = 19.49,
+  offsetx1/.initial = 11.246,
+  offsety1/.initial = 11.223,
+  horizontallinethickness1/.initial = 19.515,
+  verticallinethickness1/.initial = 19.49,
   width/.initial = 1000,
   extrax/.initial = -15,
   extray/.initial = -15,
@@ -15,10 +23,10 @@
 
 \pgfkeys{
   /cornermetadata/style02/.cd,
-  offsetx/.initial = 24,
-  offsety/.initial = 24,
-  horizontallinethickness/.initial = 8,
-  verticallinethickness/.initial = 8,
+  offsetx1/.initial = 24,
+  offsety1/.initial = 24,
+  horizontallinethickness1/.initial = 8,
+  verticallinethickness1/.initial = 8,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -26,10 +34,10 @@
 
 \pgfkeys{
   /cornermetadata/style03/.cd,
-  offsetx/.initial = 0,
-  offsety/.initial = 0,
-  horizontallinethickness/.initial = 10,
-  verticallinethickness/.initial = 10,
+  offsetx1/.initial = 0,
+  offsety1/.initial = 0,
+  horizontallinethickness1/.initial = 10,
+  verticallinethickness1/.initial = 10,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -37,10 +45,10 @@
 
 \pgfkeys{
   /cornermetadata/style04/.cd,
-  offsetx/.initial = 0,
-  offsety/.initial = 0,
-  horizontallinethickness/.initial = 15,
-  verticallinethickness/.initial = 15,
+  offsetx1/.initial = 0,
+  offsety1/.initial = 0,
+  horizontallinethickness1/.initial = 15,
+  verticallinethickness1/.initial = 15,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -48,10 +56,10 @@
 
 \pgfkeys{
   /cornermetadata/style05/.cd,
-  offsetx/.initial = 35,
-  offsety/.initial = 35,
-  horizontallinethickness/.initial = 12,
-  verticallinethickness/.initial = 12,
+  offsetx1/.initial = 35,
+  offsety1/.initial = 35,
+  horizontallinethickness1/.initial = 12,
+  verticallinethickness1/.initial = 12,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -59,10 +67,10 @@
 
 \pgfkeys{
   /cornermetadata/style06/.cd,
-  offsetx/.initial = 35.91,
-  offsety/.initial = 37.11,
-  horizontallinethickness/.initial = 13.17,
-  verticallinethickness/.initial = 13.1,
+  offsetx1/.initial = 35.91,
+  offsety1/.initial = 37.11,
+  horizontallinethickness1/.initial = 13.17,
+  verticallinethickness1/.initial = 13.1,
   width/.initial = 1000,
   extrax/.initial = -150,
   extray/.initial = -150,
@@ -70,10 +78,10 @@
 
 \pgfkeys{
   /cornermetadata/style07/.cd,
-  offsetx/.initial = 100,
-  offsety/.initial = 100,
-  horizontallinethickness/.initial = 12,
-  verticallinethickness/.initial = 12,
+  offsetx1/.initial = 100,
+  offsety1/.initial = 100,
+  horizontallinethickness1/.initial = 12,
+  verticallinethickness1/.initial = 12,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -81,10 +89,10 @@
 
 \pgfkeys{
   /cornermetadata/style08/.cd,
-  offsetx/.initial = 50,
-  offsety/.initial = 50,
-  horizontallinethickness/.initial = 14,
-  verticallinethickness/.initial = 14,
+  offsetx1/.initial = 50,
+  offsety1/.initial = 50,
+  horizontallinethickness1/.initial = 14,
+  verticallinethickness1/.initial = 14,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -92,10 +100,10 @@
 
 \pgfkeys{
   /cornermetadata/style09/.cd,
-  offsetx/.initial = 55.87,
-  offsety/.initial = 51.5,
-  horizontallinethickness/.initial = 12,
-  verticallinethickness/.initial = 11.97,
+  offsetx1/.initial = 55.87,
+  offsety1/.initial = 51.5,
+  horizontallinethickness1/.initial = 12,
+  verticallinethickness1/.initial = 11.97,
   width/.initial = 1000,
   extrax/.initial = -300,
   extray/.initial = -300,
@@ -103,10 +111,10 @@
 
 \pgfkeys{
   /cornermetadata/style10/.cd,
-  offsetx/.initial = 89.764,
-  offsety/.initial = 89.764,
-  horizontallinethickness/.initial = 21.074,
-  verticallinethickness/.initial = 21.074,
+  offsetx1/.initial = 89.764,
+  offsety1/.initial = 89.764,
+  horizontallinethickness1/.initial = 21.074,
+  verticallinethickness1/.initial = 21.074,
   width/.initial = 1000,
   extrax/.initial = -30,
   extray/.initial = -30,
@@ -114,10 +122,10 @@
 
 \pgfkeys{
   /cornermetadata/style11/.cd,
-  offsetx/.initial = 71.123,
-  offsety/.initial = 71.123,
-  horizontallinethickness/.initial = 27.806,
-  verticallinethickness/.initial = 27.806,
+  offsetx1/.initial = 71.123,
+  offsety1/.initial = 71.123,
+  horizontallinethickness1/.initial = 27.806,
+  verticallinethickness1/.initial = 27.806,
   width/.initial = 1000,
   extrax/.initial = -30,
   extray/.initial = -30,
@@ -129,10 +137,10 @@
 
 \pgfkeys{
   /cornermetadata/style12/.cd,
-  offsetx/.initial = 0,
-  offsety/.initial = 0,
-  horizontallinethickness/.initial = 20,
-  verticallinethickness/.initial = 20,
+  offsetx1/.initial = 0,
+  offsety1/.initial = 0,
+  horizontallinethickness1/.initial = 20,
+  verticallinethickness1/.initial = 20,
   width/.initial = 1000,
   extrax/.initial = -20,
   extray/.initial = -20,
@@ -144,10 +152,10 @@
 
 \pgfkeys{
   /cornermetadata/style13/.cd,
-  offsetx/.initial = 53.107,
-  offsety/.initial = 53.107,
-  horizontallinethickness/.initial = 21.175,
-  verticallinethickness/.initial = 21.175,
+  offsetx1/.initial = 53.107,
+  offsety1/.initial = 53.107,
+  horizontallinethickness1/.initial = 21.175,
+  verticallinethickness1/.initial = 21.175,
   width/.initial = 1000,
   extrax/.initial = -25,
   extray/.initial = -25,
@@ -159,10 +167,10 @@
 
 \pgfkeys{
   /cornermetadata/style14/.cd,
-  offsetx/.initial = 31.602,
-  offsety/.initial = 0,
-  horizontallinethickness/.initial = 12.259,
-  verticallinethickness/.initial = 12.254,
+  offsetx1/.initial = 31.602,
+  offsety1/.initial = 0,
+  horizontallinethickness1/.initial = 12.259,
+  verticallinethickness1/.initial = 12.254,
   width/.initial = 1000,
   extrax/.initial = -20,
   extray/.initial = -20,
@@ -170,10 +178,10 @@
 
 \pgfkeys{
   /cornermetadata/style15/.cd,
-  offsetx/.initial = 30.193,
-  offsety/.initial = 33.557,
-  horizontallinethickness/.initial = 9.153,
-  verticallinethickness/.initial = 9.154,
+  offsetx1/.initial = 30.193,
+  offsety1/.initial = 33.557,
+  horizontallinethickness1/.initial = 9.153,
+  verticallinethickness1/.initial = 9.154,
   width/.initial = 1000,
   extrax/.initial = -20,
   extray/.initial = -20,
@@ -181,10 +189,10 @@
 
 \pgfkeys{
   /cornermetadata/style16/.cd,
-  offsetx/.initial = 30,
-  offsety/.initial = 25,
-  horizontallinethickness/.initial = 20,
-  verticallinethickness/.initial = 20,
+  offsetx1/.initial = 30,
+  offsety1/.initial = 25,
+  horizontallinethickness1/.initial = 20,
+  verticallinethickness1/.initial = 20,
   width/.initial = 1000,
   extrax/.initial = 10,
   extray/.initial = 10,
@@ -192,10 +200,10 @@
 
 \pgfkeys{
   /cornermetadata/style17/.cd,
-  offsetx/.initial = 125.355,
-  offsety/.initial = 124.609,
-  horizontallinethickness/.initial = 35.83,
-  verticallinethickness/.initial = 35.248,
+  offsetx1/.initial = 125.355,
+  offsety1/.initial = 124.609,
+  horizontallinethickness1/.initial = 35.83,
+  verticallinethickness1/.initial = 35.248,
   width/.initial = 1000,
   extrax/.initial = -30,
   extray/.initial = -30,
@@ -207,10 +215,10 @@
 
 \pgfkeys{
   /cornermetadata/style18/.cd,
-  offsetx/.initial = 0,
-  offsety/.initial = 0,
-  horizontallinethickness/.initial = 8.48,
-  verticallinethickness/.initial = 8.484,
+  offsetx1/.initial = 0,
+  offsety1/.initial = 0,
+  horizontallinethickness1/.initial = 8.48,
+  verticallinethickness1/.initial = 8.484,
   width/.initial = 1000,
   extrax/.initial = -10,
   extray/.initial = -10,
@@ -222,13 +230,13 @@
 
 \pgfkeys{
   /cornermetadata/style19/.cd,
-  offsetx/.initial = 67.402,
-  offsety/.initial = 53.447,
-  horizontallinethickness/.initial = 17.157,
-  verticallinethickness/.initial = 17.164,
+  offsetx1/.initial = 67.402,
+  offsety1/.initial = 53.447,
+  horizontallinethickness1/.initial = 17.157,
+  verticallinethickness1/.initial = 17.164,
   width/.initial = 1000,
-  extrax/.initial = -30,
-  extray/.initial = -30,
+  extrax/.initial = -90,
+  extray/.initial = -90,
   offsetx2/.initial = 116.961,
   offsety2/.initial = 100.93,
   horizontallinethickness2/.initial = 16.759,
@@ -237,10 +245,10 @@
 
 \pgfkeys{
   /cornermetadata/style20/.cd,
-  offsetx/.initial = 56.986,
-  offsety/.initial = 54.534,
-  horizontallinethickness/.initial = 8.587,
-  verticallinethickness/.initial = 8.588,
+  offsetx1/.initial = 56.986,
+  offsety1/.initial = 54.534,
+  horizontallinethickness1/.initial = 8.587,
+  verticallinethickness1/.initial = 8.588,
   width/.initial = 1000,
   extrax/.initial = -30,
   extray/.initial = -30,
@@ -252,10 +260,10 @@
 
 \pgfkeys{
   /cornermetadata/style21/.cd,
-  offsetx/.initial = 71.4,
-  offsety/.initial = 71.4,
-  horizontallinethickness/.initial = 14.457,
-  verticallinethickness/.initial = 14.57,
+  offsetx1/.initial = 71.4,
+  offsety1/.initial = 71.4,
+  horizontallinethickness1/.initial = 14.457,
+  verticallinethickness1/.initial = 14.57,
   width/.initial = 1000,
   extrax/.initial = -30,
   extray/.initial = -30,
@@ -267,13 +275,13 @@
 
 \pgfkeys{
   /cornermetadata/style22/.cd,
-  offsetx/.initial = 56.752,
-  offsety/.initial = 48.186,
-  horizontallinethickness/.initial = 8.778,
-  verticallinethickness/.initial = 8.778,
+  offsetx1/.initial = 56.752,
+  offsety1/.initial = 48.186,
+  horizontallinethickness1/.initial = 8.778,
+  verticallinethickness1/.initial = 8.778,
   width/.initial = 1000,
-  extrax/.initial = -7,
-  extray/.initial = -7,
+  extrax/.initial = -10,
+  extray/.initial = -10,
   offsetx2/.initial = 84.528,
   offsety2/.initial = 74.544,
   horizontallinethickness2/.initial = 8.777,
@@ -282,10 +290,10 @@
 
 \pgfkeys{
   /cornermetadata/style23/.cd,
-  offsetx/.initial = 23.549,
-  offsety/.initial = 9.063,
-  horizontallinethickness/.initial = 14.99,
-  verticallinethickness/.initial = 15,
+  offsetx1/.initial = 23.549,
+  offsety1/.initial = 9.063,
+  horizontallinethickness1/.initial = 14.99,
+  verticallinethickness1/.initial = 15,
   width/.initial = 1000,
   extrax/.initial = -15,
   extray/.initial = -15,
@@ -293,10 +301,10 @@
 
 \pgfkeys{
   /cornermetadata/style24/.cd,
-  offsetx/.initial = 55,
-  offsety/.initial = 45.5,
-  horizontallinethickness/.initial = 15,
-  verticallinethickness/.initial = 15,
+  offsetx1/.initial = 55,
+  offsety1/.initial = 45.5,
+  horizontallinethickness1/.initial = 15,
+  verticallinethickness1/.initial = 15,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -304,10 +312,10 @@
 
 \pgfkeys{
   /cornermetadata/style25/.cd,
-  offsetx/.initial = 41.641,
-  offsety/.initial = 50.729,
-  horizontallinethickness/.initial = 13.889,
-  verticallinethickness/.initial = 13.888,
+  offsetx1/.initial = 41.641,
+  offsety1/.initial = 50.729,
+  horizontallinethickness1/.initial = 13.889,
+  verticallinethickness1/.initial = 13.888,
   width/.initial = 1000,
   extrax/.initial = -20,
   extray/.initial = -20,
@@ -319,10 +327,10 @@
 
 \pgfkeys{
   /cornermetadata/style26/.cd,
-  offsetx/.initial = 16.986,
-  offsety/.initial = 16.981,
-  horizontallinethickness/.initial = 17.62,
-  verticallinethickness/.initial = 17.615,
+  offsetx1/.initial = 16.986,
+  offsety1/.initial = 16.981,
+  horizontallinethickness1/.initial = 17.62,
+  verticallinethickness1/.initial = 17.615,
   width/.initial = 1000,
   extrax/.initial = -20,
   extray/.initial = -20,
@@ -330,10 +338,10 @@
 
 \pgfkeys{
   /cornermetadata/style27/.cd,
-  offsetx/.initial = 40.332,
-  offsety/.initial = 37.234,
-  horizontallinethickness/.initial = 26.564,
-  verticallinethickness/.initial = 26.564,
+  offsetx1/.initial = 40.332,
+  offsety1/.initial = 37.234,
+  horizontallinethickness1/.initial = 26.564,
+  verticallinethickness1/.initial = 26.564,
   width/.initial = 1000,
   extrax/.initial = -30,
   extray/.initial = -30,
@@ -341,10 +349,10 @@
 
 \pgfkeys{
   /cornermetadata/style28/.cd,
-  offsetx/.initial = 20.188,
-  offsety/.initial = 14.397,
-  horizontallinethickness/.initial = 23.368,
-  verticallinethickness/.initial = 23.367,
+  offsetx1/.initial = 20.188,
+  offsety1/.initial = 14.397,
+  horizontallinethickness1/.initial = 23.368,
+  verticallinethickness1/.initial = 23.367,
   width/.initial = 1000,
   extrax/.initial = -20,
   extray/.initial = -20,
@@ -352,10 +360,10 @@
 
 \pgfkeys{
   /cornermetadata/style29/.cd,
-  offsetx/.initial = 177.238,
-  offsety/.initial = 168.635,
-  horizontallinethickness/.initial = 12.136,
-  verticallinethickness/.initial = 12.141,
+  offsetx1/.initial = 177.238,
+  offsety1/.initial = 168.635,
+  horizontallinethickness1/.initial = 12.136,
+  verticallinethickness1/.initial = 12.141,
   width/.initial = 1000,
   extrax/.initial = -15,
   extray/.initial = -15,
@@ -363,10 +371,10 @@
 
 \pgfkeys{
   /cornermetadata/style30/.cd,
-  offsetx/.initial = 18.009,
-  offsety/.initial = 32.081,
-  horizontallinethickness/.initial = 18.708,
-  verticallinethickness/.initial = 18.707,
+  offsetx1/.initial = 18.009,
+  offsety1/.initial = 32.081,
+  horizontallinethickness1/.initial = 18.708,
+  verticallinethickness1/.initial = 18.707,
   width/.initial = 1000,
   extrax/.initial = -20,
   extray/.initial = -20,
@@ -374,10 +382,10 @@
 
 \pgfkeys{
   /cornermetadata/style31/.cd,
-  offsetx/.initial = 0,
-  offsety/.initial = 0,
-  horizontallinethickness/.initial = 25,
-  verticallinethickness/.initial = 25,
+  offsetx1/.initial = 0,
+  offsety1/.initial = 0,
+  horizontallinethickness1/.initial = 25,
+  verticallinethickness1/.initial = 25,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -385,10 +393,10 @@
 
 \pgfkeys{
   /cornermetadata/style32/.cd,
-  offsetx/.initial = 4.82,
-  offsety/.initial = 7.755,
-  horizontallinethickness/.initial = 14.846,
-  verticallinethickness/.initial = 12.91,
+  offsetx1/.initial = 4.82,
+  offsety1/.initial = 7.755,
+  horizontallinethickness1/.initial = 14.846,
+  verticallinethickness1/.initial = 12.91,
   width/.initial = 1000,
   extrax/.initial = -15,
   extray/.initial = -15,
@@ -396,10 +404,10 @@
 
 \pgfkeys{
   /cornermetadata/style33/.cd,
-  offsetx/.initial = 0,
-  offsety/.initial = 0,
-  horizontallinethickness/.initial = 15,
-  verticallinethickness/.initial = 15,
+  offsetx1/.initial = 0,
+  offsety1/.initial = 0,
+  horizontallinethickness1/.initial = 15,
+  verticallinethickness1/.initial = 15,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
@@ -407,10 +415,10 @@
 
 \pgfkeys{
   /cornermetadata/style34/.cd,
-  offsetx/.initial = 71,
-  offsety/.initial = 68,
-  horizontallinethickness/.initial = 24,
-  verticallinethickness/.initial = 25,
+  offsetx1/.initial = 71,
+  offsety1/.initial = 68,
+  horizontallinethickness1/.initial = 24,
+  verticallinethickness1/.initial = 25,
   width/.initial = 1000,
   extrax/.initial = -20,
   extray/.initial = -7.5,
@@ -418,10 +426,10 @@
 
 \pgfkeys{
   /cornermetadata/style35/.cd,
-  offsetx/.initial = 0,
-  offsety/.initial = 7.552,
-  horizontallinethickness/.initial = 25.535,
-  verticallinethickness/.initial = 25.533,
+  offsetx1/.initial = 0,
+  offsety1/.initial = 7.552,
+  horizontallinethickness1/.initial = 25.535,
+  verticallinethickness1/.initial = 25.533,
   width/.initial = 1000,
   extrax/.initial = -25,
   extray/.initial = -25,
@@ -433,10 +441,10 @@
 
 \pgfkeys{
   /cornermetadata/style36/.cd,
-  offsetx/.initial = 0,
-  offsety/.initial = 0,
-  horizontallinethickness/.initial = 25,
-  verticallinethickness/.initial = 25,
+  offsetx1/.initial = 0,
+  offsety1/.initial = 0,
+  horizontallinethickness1/.initial = 25,
+  verticallinethickness1/.initial = 25,
   width/.initial = 1000,
   extrax/.initial = 0,
   extray/.initial = 0,
