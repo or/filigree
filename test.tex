@@ -18,30 +18,30 @@
     \coordinate (southwest) at (0, 0);
     \coordinate (southeast) at (\fbwidth, 0);
 
-    \def\nwcorner{\fbcorner}
-    \def\necorner{\fbcorner}
-    \def\swcorner{\fbcorner}
-    \def\secorner{\fbcorner}
+    \def\nwcorner{corners/\fbcorner.png}
+    \def\necorner{corners/\fbcorner.png}
+    \def\swcorner{corners/\fbcorner.png}
+    \def\secorner{corners/\fbcorner.png}
 
     \def\offsetx
-      {\fbcornersize * \getcornermeta{\fbcorner}{offsetx} /
-       \getcornermeta{\fbcorner}{width}}
+      {\fbcornersize * \getcornermetadata{\fbcorner}{offsetx} /
+       \getcornermetadata{\fbcorner}{width}}
     \def\offsety
-      {\fbcornersize * \getcornermeta{\fbcorner}{offsety} /
-       \getcornermeta{\fbcorner}{width}}
+      {\fbcornersize * \getcornermetadata{\fbcorner}{offsety} /
+       \getcornermetadata{\fbcorner}{width}}
     \def\extrax
-      {\fbcornersize * \getcornermeta{\fbcorner}{extrax} /
-       \getcornermeta{\fbcorner}{width}}
+      {\fbcornersize * \getcornermetadata{\fbcorner}{extrax} /
+       \getcornermetadata{\fbcorner}{width}}
     \def\extray
-      {\fbcornersize * \getcornermeta{\fbcorner}{extray} /
-       \getcornermeta{\fbcorner}{width}}
+      {\fbcornersize * \getcornermetadata{\fbcorner}{extray} /
+       \getcornermetadata{\fbcorner}{width}}
 
-    \def\linetopthickness
-      {\fbcornersize * \getcornermeta{\fbcorner}{linetopthickness} /
-       \getcornermeta{\fbcorner}{width}}
-    \def\lineleftthickness
-      {\fbcornersize * \getcornermeta{\fbcorner}{lineleftthickness} /
-       \getcornermeta{\fbcorner}{width}}
+    \def\horizontallinethickness
+      {\fbcornersize * \getcornermetadata{\fbcorner}{horizontallinethickness} /
+       \getcornermetadata{\fbcorner}{width}}
+    \def\verticallinethickness
+      {\fbcornersize * \getcornermetadata{\fbcorner}{verticallinethickness} /
+       \getcornermetadata{\fbcorner}{width}}
 
     \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{diagonal}}
     {
@@ -53,10 +53,10 @@
         {\adjustbox{scale={-1}{-1}}
         {\includegraphics[width=\fbcornersize]{\secorner}}};
 
-      \coordinate (toplinestart) at ($(cornernorthwest.north east) - (\extrax, 0)$);
-      \coordinate (leftlinestart) at ($(cornernorthwest.south west) + (0, \extray)$);
-      \coordinate (bottomlineend) at ($(cornersoutheast.south west) + (\extrax, 0)$);
-      \coordinate (rightlineend) at ($(cornersoutheast.north east) - (0, \extray)$);
+      \coordinate (toplinestart) at ($(cornernorthwest.north east) + (\extrax, 0)$);
+      \coordinate (leftlinestart) at ($(cornernorthwest.south west) - (0, \extray)$);
+      \coordinate (bottomlineend) at ($(cornersoutheast.south west) - (\extrax, 0)$);
+      \coordinate (rightlineend) at ($(cornersoutheast.north east) + (0, \extray)$);
     }
     {
       \node (cornernorthwest)
@@ -67,13 +67,13 @@
         (southeast) {};
 
       \coordinate (toplinestart) at
-      ($(northwest) + (\offsetx, 0) + (\lineleftthickness / 2, 0)$);
+      ($(northwest) + (\offsetx, 0) + (\verticallinethickness / 2, 0)$);
       \coordinate (leftlinestart) at
-      ($(northwest) - (0, \offsety) - (0, \linetopthickness / 2)$);
+      ($(northwest) - (0, \offsety) - (0, \horizontallinethickness / 2)$);
       \coordinate (bottomlineend) at
-      ($(southeast) - (\offsetx, 0) - (\lineleftthickness / 2, 0)$);
+      ($(southeast) - (\offsetx, 0) - (\verticallinethickness / 2, 0)$);
       \coordinate (rightlineend) at
-      ($(southeast) + (0, \offsety) + (0, \linetopthickness / 2)$);
+      ($(southeast) + (0, \offsety) + (0, \horizontallinethickness / 2)$);
     }
 
     \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{antidiagonal}}
@@ -88,13 +88,13 @@
         {\includegraphics[width=\fbcornersize]{\swcorner}}};
 
       \coordinate (toplineend) at
-      ($(cornernortheast.north west) + (\extrax, 0)$);
+      ($(cornernortheast.north west) - (\extrax, 0)$);
       \coordinate (rightlinestart) at
-      ($(cornernortheast.south east) + (0, \extray)$);
+      ($(cornernortheast.south east) - (0, \extray)$);
       \coordinate (bottomlinestart) at
-      ($(cornersouthwest.south east) - (\extrax, 0)$);
+      ($(cornersouthwest.south east) + (\extrax, 0)$);
       \coordinate (leftlineend) at
-      ($(cornersouthwest.north west) - (0, \extray)$);
+      ($(cornersouthwest.north west) + (0, \extray)$);
     }
     {
       \node (cornernortheast)
@@ -105,34 +105,34 @@
         (southwest) {};
 
       \coordinate (toplineend) at
-      ($(northeast) - (\offsetx, 0) - (\lineleftthickness / 2, 0)$);
+      ($(northeast) - (\offsetx, 0) - (\verticallinethickness / 2, 0)$);
       \coordinate (rightlinestart) at
-      ($(northeast) - (0, \offsety) - (0, \linetopthickness / 2)$);
+      ($(northeast) - (0, \offsety) - (0, \horizontallinethickness / 2)$);
       \coordinate (bottomlinestart) at
-      ($(southwest) + (\offsetx, 0) + (\lineleftthickness / 2, 0)$);
+      ($(southwest) + (\offsetx, 0) + (\verticallinethickness / 2, 0)$);
       \coordinate (leftlineend) at
-      ($(southwest) + (0, \offsety) + (0, \linetopthickness / 2)$);
+      ($(southwest) + (0, \offsety) + (0, \horizontallinethickness / 2)$);
     }
 
     % top line
-    \draw[line width={\linetopthickness}]
-      ([yshift={- \offsety - \linetopthickness}] toplinestart) --
-      ([yshift={- \offsety - \linetopthickness}] toplineend);
+    \draw[line width={\horizontallinethickness}]
+      ([yshift={- \offsety - \horizontallinethickness}] toplinestart) --
+      ([yshift={- \offsety - \horizontallinethickness}] toplineend);
 
     % bottom line
-    \draw[line width={\linetopthickness}]
-      ([yshift={\offsety + \linetopthickness}] bottomlinestart) --
-      ([yshift={\offsety + \linetopthickness}] bottomlineend);
+    \draw[line width={\horizontallinethickness}]
+      ([yshift={\offsety + \horizontallinethickness}] bottomlinestart) --
+      ([yshift={\offsety + \horizontallinethickness}] bottomlineend);
 
     % left line
-    \draw[line width={\linetopthickness}]
-      ([xshift={\offsetx + \lineleftthickness}] leftlinestart) --
-      ([xshift={\offsetx + \lineleftthickness}] leftlineend);
+    \draw[line width={\verticallinethickness}]
+      ([xshift={\offsetx + \verticallinethickness}] leftlinestart) --
+      ([xshift={\offsetx + \verticallinethickness}] leftlineend);
 
     % right line
-    \draw[line width={\linetopthickness}]
-      ([xshift={- \offsetx - \lineleftthickness}] rightlinestart) --
-      ([xshift={- \offsetx - \lineleftthickness}] rightlineend);
+    \draw[line width={\verticallinethickness}]
+      ([xshift={- \offsetx - \verticallinethickness}] rightlinestart) --
+      ([xshift={- \offsetx - \verticallinethickness}] rightlineend);
 
     \node (content) at (\fbwidth/2, \fbheight/2)
       {\parbox{\fbwidth}{\centering #2}};
@@ -147,14 +147,25 @@
   cornersize/.store in=\fbcornersize,
   cornersize=0.5cm,
   corner/.store in=\fbcorner,
-  corner=corner,
+  corner=style01,
   mode/.store in=\fbmode,
   mode=full,
 }
 
 \begin{document}
+\def\style{style25}
 
-\framedbox[width=9cm, height=7cm, cornersize=1cm, mode=diagonal]
+\framedbox[width=6cm, height=4cm, corner=\style, cornersize=1cm, mode=full]
+  {This is some sample content within the box.}
+
+\vspace{1cm}
+
+\framedbox[width=6cm, height=4cm, corner=\style, cornersize=1cm, mode=diagonal]
+  {This is some sample content within the box.}
+
+\vspace{1cm}
+
+\framedbox[width=6cm, height=4cm, corner=\style, cornersize=1cm, mode=antidiagonal]
   {This is some sample content within the box.}
 
 \end{document}
