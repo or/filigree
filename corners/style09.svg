@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="56.085819"
-   height="55.722439"
-   viewBox="0 0 56.08582 55.722441"
+   width="1000"
+   height="993.521"
+   viewBox="0 0 1000 993.52099"
    version="1.1"
    id="svg1173"
    sodipodi:docname="style09.svg"
@@ -27,7 +27,7 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="9.604825"
-     inkscape:cx="24.050412"
+     inkscape:cx="23.998355"
      inkscape:cy="32.275445"
      inkscape:current-layer="svg1173"
      inkscape:window-width="1816"
@@ -37,7 +37,7 @@
      inkscape:window-maximized="0" />
   <g
      id="g2537"
-     transform="translate(-30.083529,-267.58234)"
+     transform="matrix(17.829819,0,0,17.829819,-536.38387,-4770.9447)"
      style="fill:#000000">
     <path
        d="m 59.9484,271.25439 c 0,0 25.0049,-0.31326 25.9447,-0.31326 0.3916,-0.0522 0.3443,-0.25541 0,-0.28716 -0.9398,0 -25.6314,-0.31292 -25.6314,-0.31292 -0.1175,-0.008 -0.2593,0.0861 -0.345,0.35243 -0.086,0.26599 -0.1722,0.5655 0.032,0.56091"

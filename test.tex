@@ -68,11 +68,11 @@
         (southeast) {};
 
       \coordinate (toplinestart) at
-      ($(northwest) + (\offsetx, 0) + (0.25pt, 0) $);
+      ($(northwest) + (\offsetx, 0) + (0.2pt, 0) $);
       \coordinate (leftlinestart) at
       ($(northwest) - (0, \offsety) - (0, 0.2pt)$);
       \coordinate (bottomlineend) at
-      ($(southeast) - (\offsetx, 0) - (0.25pt, 0)$);
+      ($(southeast) - (\offsetx, 0) - (0.2pt, 0)$);
       \coordinate (rightlineend) at
       ($(southeast) + (0, \offsety) + (0, 0.2pt)$);
     }
@@ -106,11 +106,11 @@
         (southwest) {};
 
       \coordinate (toplineend) at
-      ($(northeast) - (\offsetx, 0) - (0.25pt, 0)$);
+      ($(northeast) - (\offsetx, 0) - (0.2pt, 0)$);
       \coordinate (rightlinestart) at
       ($(northeast) - (0, \offsety) - (0, 0.2pt)$);
       \coordinate (bottomlinestart) at
-      ($(southwest) + (\offsetx, 0) + (0.25pt, 0)$);
+      ($(southwest) + (\offsetx, 0) + (0.2pt, 0)$);
       \coordinate (leftlineend) at
       ($(southwest) + (0, \offsety) + (0, 0.2pt)$);
     }
@@ -127,13 +127,13 @@
 
     % left line
     \draw[line width={\verticallinethickness}]
-      ([xshift={\offsetx + \verticallinethickness / 2 + 0.25pt}] leftlinestart) --
-      ([xshift={\offsetx + \verticallinethickness / 2 + 0.25pt}] leftlineend);
+      ([xshift={\offsetx + \verticallinethickness / 2 + 0.2pt}] leftlinestart) --
+      ([xshift={\offsetx + \verticallinethickness / 2 + 0.2pt}] leftlineend);
 
     % right line
     \draw[line width={\verticallinethickness}]
-      ([xshift={- \offsetx - \verticallinethickness / 2 - 0.25pt}] rightlinestart) --
-      ([xshift={- \offsetx - \verticallinethickness / 2 - 0.25pt}] rightlineend);
+      ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlinestart) --
+      ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlineend);
 
     \node (content) at (\fbwidth/2, \fbheight/2)
       {\parbox{\fbwidth}{\centering #2
@@ -155,9 +155,9 @@
 }
 
 \begin{document}
-\def\style{style06}
+\def\style{style35}
 
-\framedbox[width=8cm, height=8cm, corner=\style, cornersize=4cm, mode=full]
+\framedbox[width=8cm, height=8cm, corner=\style, cornersize=3cm, mode=full]
   {This is some sample content within the box.}
 
 \vspace{1cm}
