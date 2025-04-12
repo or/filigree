@@ -59,6 +59,17 @@
       \coordinate (leftlinestart) at ($(cornernorthwest.south west) - (0, \extray)$);
       \coordinate (bottomlineend) at ($(cornersoutheast.south west) - (\extrax, 0)$);
       \coordinate (rightlineend) at ($(cornersoutheast.north east) + (0, \extray)$);
+
+      \ifthenelse{\NOT
+        \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+      {
+        \coordinate (toplinestartsecond) at
+        ($(cornernorthwest.north east) + (\extrax, 0)$);
+        \coordinate (leftlinestartsecond) at ($(cornernorthwest.south west) - (0, \extray)$);
+        \coordinate (bottomlineendsecond) at ($(cornersoutheast.south west) - (\extrax, 0)$);
+        \coordinate (rightlineendsecond) at ($(cornersoutheast.north east) + (0, \extray)$);
+      }
+      {}
     }
     {
       \node (cornernorthwest)
@@ -76,6 +87,20 @@
       ($(southeast) - (\offsetx, 0) - (0.2pt, 0)$);
       \coordinate (rightlineend) at
       ($(southeast) + (0, \offsety) + (0, 0.2pt)$);
+
+      \ifthenelse{\NOT
+        \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+      {
+        \coordinate (toplinestartsecond) at
+        ($(northwest) + (\offsetxsecond, 0) + (0.2pt, 0) $);
+        \coordinate (leftlinestartsecond) at
+        ($(northwest) - (0, \offsetysecond) - (0, 0.2pt)$);
+        \coordinate (bottomlineendsecond) at
+        ($(southeast) - (\offsetxsecond, 0) - (0.2pt, 0)$);
+        \coordinate (rightlineendsecond) at
+        ($(southeast) + (0, \offsetysecond) + (0, 0.2pt)$);
+      }
+      {}
     }
 
     \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{antidiagonal}}
@@ -97,6 +122,20 @@
       ($(cornersouthwest.south east) + (\extrax, 0)$);
       \coordinate (leftlineend) at
       ($(cornersouthwest.north west) + (0, \extray)$);
+
+      \ifthenelse{\NOT
+        \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+      {
+        \coordinate (toplineendsecond) at
+        ($(cornernortheast.north west) - (\extrax, 0)$);
+        \coordinate (rightlinestartsecond) at
+        ($(cornernortheast.south east) - (0, \extray)$);
+        \coordinate (bottomlinestartsecond) at
+        ($(cornersouthwest.south east) + (\extrax, 0)$);
+        \coordinate (leftlineendsecond) at
+        ($(cornersouthwest.north west) + (0, \extray)$);
+      }
+      {}
     }
     {
       \node (cornernortheast)
@@ -114,6 +153,20 @@
       ($(southwest) + (\offsetx, 0) + (0.2pt, 0)$);
       \coordinate (leftlineend) at
       ($(southwest) + (0, \offsety) + (0, 0.2pt)$);
+
+      \ifthenelse{\NOT
+        \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+      {
+        \coordinate (toplineendsecond) at
+        ($(northeast) - (\offsetxsecond, 0) - (0.2pt, 0)$);
+        \coordinate (rightlinestartsecond) at
+        ($(northeast) - (0, \offsetysecond) - (0, 0.2pt)$);
+        \coordinate (bottomlinestartsecond) at
+        ($(southwest) + (\offsetxsecond, 0) + (0.2pt, 0)$);
+        \coordinate (leftlineendsecond) at
+        ($(southwest) + (0, \offsetysecond) + (0, 0.2pt)$);
+      }
+      {}
     }
 
     \ifthenelse{\equal{\fblines}{all} \OR \equal{\fblines}{2} \OR \equal{\fblines}{1}}
@@ -146,23 +199,23 @@
       {
         % top line
         \draw[line width={\horizontallinethicknesssecond}]
-          ([yshift={- \offsetysecond - \horizontallinethicknesssecond / 2 - 0.2pt}] toplinestart) --
-          ([yshift={- \offsetysecond - \horizontallinethicknesssecond / 2 - 0.2pt}] toplineend);
+          ([yshift={- \offsetysecond - \horizontallinethicknesssecond / 2 - 0.2pt}] toplinestartsecond) --
+          ([yshift={- \offsetysecond - \horizontallinethicknesssecond / 2 - 0.2pt}] toplineendsecond);
 
         % bottom line
         \draw[line width={\horizontallinethicknesssecond}]
-          ([yshift={\offsetysecond + \horizontallinethicknesssecond / 2 + 0.2pt}] bottomlinestart) --
-          ([yshift={\offsetysecond + \horizontallinethicknesssecond / 2 + 0.2pt}] bottomlineend);
+          ([yshift={\offsetysecond + \horizontallinethicknesssecond / 2 + 0.2pt}] bottomlinestartsecond) --
+          ([yshift={\offsetysecond + \horizontallinethicknesssecond / 2 + 0.2pt}] bottomlineendsecond);
 
         % left line
         \draw[line width={\verticallinethicknesssecond}]
-          ([xshift={\offsetxsecond + \verticallinethicknesssecond / 2 + 0.2pt}] leftlinestart) --
-          ([xshift={\offsetxsecond + \verticallinethicknesssecond / 2 + 0.2pt}] leftlineend);
+          ([xshift={\offsetxsecond + \verticallinethicknesssecond / 2 + 0.2pt}] leftlinestartsecond) --
+          ([xshift={\offsetxsecond + \verticallinethicknesssecond / 2 + 0.2pt}] leftlineendsecond);
 
         % right line
         \draw[line width={\verticallinethicknesssecond}]
-          ([xshift={- \offsetxsecond - \verticallinethicknesssecond / 2 - 0.2pt}] rightlinestart) --
-          ([xshift={- \offsetxsecond - \verticallinethicknesssecond / 2 - 0.2pt}] rightlineend);
+          ([xshift={- \offsetxsecond - \verticallinethicknesssecond / 2 - 0.2pt}] rightlinestartsecond) --
+          ([xshift={- \offsetxsecond - \verticallinethicknesssecond / 2 - 0.2pt}] rightlineendsecond);
       }
       {}
     }
