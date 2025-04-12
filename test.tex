@@ -23,29 +23,35 @@
     \def\swcorner{\fbcorner}
     \def\secorner{\fbcorner}
 
-    \def\offsetx{\fbcornersize * \getcornermeta{\fbcorner}{offsetx} /
-        \getcornermeta{\fbcorner}{width}}
-    \def\offsety{\fbcornersize * \getcornermeta{\fbcorner}{offsety} /
-        \getcornermeta{\fbcorner}{width}}
-    \def\extrax{\fbcornersize * \getcornermeta{\fbcorner}{extrax} /
-        \getcornermeta{\fbcorner}{width}}
-    \def\extray{\fbcornersize * \getcornermeta{\fbcorner}{extray} /
-        \getcornermeta{\fbcorner}{width}}
+    \def\offsetx
+      {\fbcornersize * \getcornermeta{\fbcorner}{offsetx} /
+       \getcornermeta{\fbcorner}{width}}
+    \def\offsety
+      {\fbcornersize * \getcornermeta{\fbcorner}{offsety} /
+       \getcornermeta{\fbcorner}{width}}
+    \def\extrax
+      {\fbcornersize * \getcornermeta{\fbcorner}{extrax} /
+       \getcornermeta{\fbcorner}{width}}
+    \def\extray
+      {\fbcornersize * \getcornermeta{\fbcorner}{extray} /
+       \getcornermeta{\fbcorner}{width}}
 
-    \def\linetopthickness{\fbcornersize * \getcornermeta{\fbcorner}{linetopthickness} /
-        \getcornermeta{\fbcorner}{width}}
-    \def\lineleftthickness{\fbcornersize * \getcornermeta{\fbcorner}{lineleftthickness} /
-        \getcornermeta{\fbcorner}{width}}
+    \def\linetopthickness
+      {\fbcornersize * \getcornermeta{\fbcorner}{linetopthickness} /
+       \getcornermeta{\fbcorner}{width}}
+    \def\lineleftthickness
+      {\fbcornersize * \getcornermeta{\fbcorner}{lineleftthickness} /
+       \getcornermeta{\fbcorner}{width}}
 
     \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{diagonal}}
     {
       \node[anchor=north west, inner sep=0pt]
         (cornernorthwest) at (northwest)
-        {\includegraphics[width=\fbcornersize, height=\fbcornersize]{\nwcorner}};
+        {\includegraphics[width=\fbcornersize]{\nwcorner}};
       \node[anchor=south east, inner sep=0pt]
         (cornersoutheast)at (southeast)
-        {\adjustbox{scale={-1}{-1}}{\includegraphics[width=\fbcornersize,
-              height=\fbcornersize]{\secorner}}};
+        {\adjustbox{scale={-1}{-1}}
+        {\includegraphics[width=\fbcornersize]{\secorner}}};
 
       \coordinate (toplinestart) at ($(cornernorthwest.north east) - (\extrax, 0)$);
       \coordinate (leftlinestart) at ($(cornernorthwest.south west) + (0, \extray)$);
@@ -53,66 +59,84 @@
       \coordinate (rightlineend) at ($(cornersoutheast.north east) - (0, \extray)$);
     }
     {
-      \node (cornernorthwest) [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at (northwest) {};
-      \node (cornersoutheast) [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at (southeast) {};
+      \node (cornernorthwest)
+        [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at
+        (northwest) {};
+      \node (cornersoutheast)
+        [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at
+        (southeast) {};
 
-      \coordinate (toplinestart) at ($(northwest) + (\offsetx, 0) +
-      (\lineleftthickness / 2, 0)$);
-      \coordinate (leftlinestart) at ($(northwest) - (0, \offsety) - (0,
-      \linetopthickness / 2)$);
-      \coordinate (bottomlineend) at ($(southeast) - (\offsetx, 0) -
-      (\lineleftthickness / 2, 0)$);
-      \coordinate (rightlineend) at ($(southeast) + (0, \offsety) + (0,
-      \linetopthickness / 2)$);
+      \coordinate (toplinestart) at
+      ($(northwest) + (\offsetx, 0) + (\lineleftthickness / 2, 0)$);
+      \coordinate (leftlinestart) at
+      ($(northwest) - (0, \offsety) - (0, \linetopthickness / 2)$);
+      \coordinate (bottomlineend) at
+      ($(southeast) - (\offsetx, 0) - (\lineleftthickness / 2, 0)$);
+      \coordinate (rightlineend) at
+      ($(southeast) + (0, \offsety) + (0, \linetopthickness / 2)$);
     }
 
     \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{antidiagonal}}
     {
       \node[anchor=north east, inner sep=0pt]
         (cornernortheast) at (northeast)
-        {\adjustbox{scale={-1}{1}}{\includegraphics[width=\fbcornersize, height=\fbcornersize]{\necorner}}};
+        {\adjustbox{scale={-1}{1}}
+        {\includegraphics[width=\fbcornersize]{\necorner}}};
       \node[anchor=south west, inner sep=0pt]
         (cornersouthwest)at (southwest)
-        {\adjustbox{scale={1}{-1}}{\includegraphics[width=\fbcornersize,
-              height=\fbcornersize]{\swcorner}}};
+        {\adjustbox{scale={1}{-1}}
+        {\includegraphics[width=\fbcornersize]{\swcorner}}};
 
-      \coordinate (toplineend) at ($(cornernortheast.north west) + (\extrax, 0)$);
-      \coordinate (rightlinestart) at ($(cornernortheast.south east) + (0, \extray)$);
-      \coordinate (bottomlinestart) at ($(cornersouthwest.south east) - (\extrax, 0)$);
-      \coordinate (leftlineend) at ($(cornersouthwest.north west) - (0, \extray)$);
+      \coordinate (toplineend) at
+      ($(cornernortheast.north west) + (\extrax, 0)$);
+      \coordinate (rightlinestart) at
+      ($(cornernortheast.south east) + (0, \extray)$);
+      \coordinate (bottomlinestart) at
+      ($(cornersouthwest.south east) - (\extrax, 0)$);
+      \coordinate (leftlineend) at
+      ($(cornersouthwest.north west) - (0, \extray)$);
     }
     {
-      \node (cornernortheast) [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at (northeast) {};
-      \node (cornersouthwest) [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at (southwest) {};
+      \node (cornernortheast)
+        [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at
+        (northeast) {};
+      \node (cornersouthwest)
+        [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at
+        (southwest) {};
 
-      \coordinate (toplineend) at ($(northeast) - (\offsetx, 0) -
-      (\lineleftthickness / 2, 0)$);
-      \coordinate (rightlinestart) at ($(northeast) - (0, \offsety) - (0,
-      \linetopthickness / 2)$);
-      \coordinate (bottomlinestart) at ($(southwest) + (\offsetx, 0) +
-      (\lineleftthickness / 2, 0)$);
-      \coordinate (leftlineend) at ($(southwest) + (0, \offsety) + (0,
-      \linetopthickness / 2)$);
+      \coordinate (toplineend) at
+      ($(northeast) - (\offsetx, 0) - (\lineleftthickness / 2, 0)$);
+      \coordinate (rightlinestart) at
+      ($(northeast) - (0, \offsety) - (0, \linetopthickness / 2)$);
+      \coordinate (bottomlinestart) at
+      ($(southwest) + (\offsetx, 0) + (\lineleftthickness / 2, 0)$);
+      \coordinate (leftlineend) at
+      ($(southwest) + (0, \offsety) + (0, \linetopthickness / 2)$);
     }
 
-    \draw[line width={\linetopthickness}] ([yshift={- \offsety -
-        \linetopthickness}] toplinestart) --
-    ([yshift={- \offsety - \linetopthickness}] toplineend);
+    % top line
+    \draw[line width={\linetopthickness}]
+      ([yshift={- \offsety - \linetopthickness}] toplinestart) --
+      ([yshift={- \offsety - \linetopthickness}] toplineend);
 
-    \draw[line width={\linetopthickness}] ([yshift={\offsety +
-        \linetopthickness}] bottomlinestart) --
-    ([yshift={\offsety + \linetopthickness}] bottomlineend);
+    % bottom line
+    \draw[line width={\linetopthickness}]
+      ([yshift={\offsety + \linetopthickness}] bottomlinestart) --
+      ([yshift={\offsety + \linetopthickness}] bottomlineend);
 
-    \draw[line width={\linetopthickness}] ([xshift={\offsetx
-        + \lineleftthickness}] leftlinestart) --
-    ([xshift={\offsetx + \lineleftthickness}] leftlineend);
+    % left line
+    \draw[line width={\linetopthickness}]
+      ([xshift={\offsetx + \lineleftthickness}] leftlinestart) --
+      ([xshift={\offsetx + \lineleftthickness}] leftlineend);
 
-    \draw[line width={\linetopthickness}] ([xshift={- \offsetx
-        - \lineleftthickness}] rightlinestart) --
-    ([xshift={- \offsetx - \lineleftthickness}] rightlineend);
+    % right line
+    \draw[line width={\linetopthickness}]
+      ([xshift={- \offsetx - \lineleftthickness}] rightlinestart) --
+      ([xshift={- \offsetx - \lineleftthickness}] rightlineend);
 
-    \node (content) at (\fbwidth/2, \fbheight/2) {\parbox{\fbwidth}{\centering #2}};
-  \end{tikzpicture}
+    \node (content) at (\fbwidth/2, \fbheight/2)
+      {\parbox{\fbwidth}{\centering #2}};
+ \end{tikzpicture}
 }
 
 \pgfkeys{/framedbox/.cd,
@@ -130,6 +154,7 @@
 
 \begin{document}
 
-\framedbox[width=6cm, height=4cm, cornersize=1cm, mode=diagonal]{This is some sample content within the box.}
+\framedbox[width=9cm, height=7cm, cornersize=1cm, mode=diagonal]
+  {This is some sample content within the box.}
 
 \end{document}
