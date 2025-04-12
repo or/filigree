@@ -18,10 +18,10 @@
     \coordinate (southwest) at (0, 0);
     \coordinate (southeast) at (\fbwidth, 0);
 
-    \def\nwcorner{corners/\fbcorner.png}
-    \def\necorner{corners/\fbcorner.png}
-    \def\swcorner{corners/\fbcorner.png}
-    \def\secorner{corners/\fbcorner.png}
+    \def\nwcorner{corners/\fbcorner.pdf}
+    \def\necorner{corners/\fbcorner.pdf}
+    \def\swcorner{corners/\fbcorner.pdf}
+    \def\secorner{corners/\fbcorner.pdf}
 
     \def\offsetx
       {\fbcornersize * \getcornermetadata{\fbcorner}{offsetx} /
@@ -53,7 +53,8 @@
         {\adjustbox{scale={-1}{-1}}
         {\includegraphics[width=\fbcornersize]{\secorner}}};
 
-      \coordinate (toplinestart) at ($(cornernorthwest.north east) + (\extrax, 0)$);
+      \coordinate (toplinestart) at
+      ($(cornernorthwest.north east) + (\extrax, 0)$);
       \coordinate (leftlinestart) at ($(cornernorthwest.south west) - (0, \extray)$);
       \coordinate (bottomlineend) at ($(cornersoutheast.south west) - (\extrax, 0)$);
       \coordinate (rightlineend) at ($(cornersoutheast.north east) + (0, \extray)$);
@@ -67,13 +68,13 @@
         (southeast) {};
 
       \coordinate (toplinestart) at
-      ($(northwest) + (\offsetx, 0) + (\verticallinethickness / 2, 0)$);
+      ($(northwest) + (\offsetx, 0) + (0.25pt, 0) $);
       \coordinate (leftlinestart) at
-      ($(northwest) - (0, \offsety) - (0, \horizontallinethickness / 2)$);
+      ($(northwest) - (0, \offsety) - (0, 0.2pt)$);
       \coordinate (bottomlineend) at
-      ($(southeast) - (\offsetx, 0) - (\verticallinethickness / 2, 0)$);
+      ($(southeast) - (\offsetx, 0) - (0.25pt, 0)$);
       \coordinate (rightlineend) at
-      ($(southeast) + (0, \offsety) + (0, \horizontallinethickness / 2)$);
+      ($(southeast) + (0, \offsety) + (0, 0.2pt)$);
     }
 
     \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{antidiagonal}}
@@ -105,37 +106,38 @@
         (southwest) {};
 
       \coordinate (toplineend) at
-      ($(northeast) - (\offsetx, 0) - (\verticallinethickness / 2, 0)$);
+      ($(northeast) - (\offsetx, 0) - (0.25pt, 0)$);
       \coordinate (rightlinestart) at
-      ($(northeast) - (0, \offsety) - (0, \horizontallinethickness / 2)$);
+      ($(northeast) - (0, \offsety) - (0, 0.2pt)$);
       \coordinate (bottomlinestart) at
-      ($(southwest) + (\offsetx, 0) + (\verticallinethickness / 2, 0)$);
+      ($(southwest) + (\offsetx, 0) + (0.25pt, 0)$);
       \coordinate (leftlineend) at
-      ($(southwest) + (0, \offsety) + (0, \horizontallinethickness / 2)$);
+      ($(southwest) + (0, \offsety) + (0, 0.2pt)$);
     }
 
     % top line
     \draw[line width={\horizontallinethickness}]
-      ([yshift={- \offsety - \horizontallinethickness}] toplinestart) --
-      ([yshift={- \offsety - \horizontallinethickness}] toplineend);
+      ([yshift={- \offsety - \horizontallinethickness / 2 - 0.2pt}] toplinestart) --
+      ([yshift={- \offsety - \horizontallinethickness / 2 - 0.2pt}] toplineend);
 
     % bottom line
     \draw[line width={\horizontallinethickness}]
-      ([yshift={\offsety + \horizontallinethickness}] bottomlinestart) --
-      ([yshift={\offsety + \horizontallinethickness}] bottomlineend);
+      ([yshift={\offsety + \horizontallinethickness / 2 + 0.2pt}] bottomlinestart) --
+      ([yshift={\offsety + \horizontallinethickness / 2 + 0.2pt}] bottomlineend);
 
     % left line
     \draw[line width={\verticallinethickness}]
-      ([xshift={\offsetx + \verticallinethickness}] leftlinestart) --
-      ([xshift={\offsetx + \verticallinethickness}] leftlineend);
+      ([xshift={\offsetx + \verticallinethickness / 2 + 0.25pt}] leftlinestart) --
+      ([xshift={\offsetx + \verticallinethickness / 2 + 0.25pt}] leftlineend);
 
     % right line
     \draw[line width={\verticallinethickness}]
-      ([xshift={- \offsetx - \verticallinethickness}] rightlinestart) --
-      ([xshift={- \offsetx - \verticallinethickness}] rightlineend);
+      ([xshift={- \offsetx - \verticallinethickness / 2 - 0.25pt}] rightlinestart) --
+      ([xshift={- \offsetx - \verticallinethickness / 2 - 0.25pt}] rightlineend);
 
     \node (content) at (\fbwidth/2, \fbheight/2)
-      {\parbox{\fbwidth}{\centering #2}};
+      {\parbox{\fbwidth}{\centering #2
+     }};
  \end{tikzpicture}
 }
 
@@ -153,9 +155,19 @@
 }
 
 \begin{document}
-\def\style{style25}
+\def\style{style06}
+
+\framedbox[width=8cm, height=8cm, corner=\style, cornersize=4cm, mode=full]
+  {This is some sample content within the box.}
+
+\vspace{1cm}
 
 \framedbox[width=6cm, height=4cm, corner=\style, cornersize=1cm, mode=full]
+  {This is some sample content within the box.}
+
+\vspace{1cm}
+
+\framedbox[width=8cm, height=6cm, corner=\style, cornersize=2.5cm, mode=full]
   {This is some sample content within the box.}
 
 \vspace{1cm}
