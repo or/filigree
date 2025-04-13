@@ -1,0 +1,247 @@
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{xparse}
+\usepackage{adjustbox}
+\usepackage{ifthen}
+\usetikzlibrary{calc}
+
+\input{./corner_metadata.tex}
+
+\NewDocumentCommand{\framedbox}{ O{} m }{%
+
+  \begin{tikzpicture}
+    \pgfkeys{/framedbox/.cd, #1} % Set the keys based on the optional argument
+
+    \coordinate (northwest) at (0, \fbheight);
+    \coordinate (northeast) at (\fbwidth, \fbheight);
+    \coordinate (southwest) at (0, 0);
+    \coordinate (southeast) at (\fbwidth, 0);
+
+    \def\nwcorner{corners/\fbcorner.pdf}
+    \def\necorner{corners/\fbcorner.pdf}
+    \def\swcorner{corners/\fbcorner.pdf}
+    \def\secorner{corners/\fbcorner.pdf}
+
+    \def\factor{\fbcornersize / \getcornermetadata{\fbcorner}{width}}
+
+    \def\extrax{\factor * \getcornermetadata{\fbcorner}{extrax}}
+    \def\extray{\factor * \getcornermetadata{\fbcorner}{extray}}
+
+    \def\offsetx{\factor * \getcornermetadata{\fbcorner}{offsetx1}}
+    \def\offsety{\factor * \getcornermetadata{\fbcorner}{offsety1}}
+
+    \def\horizontallinethickness{\factor * \getcornermetadata{\fbcorner}{horizontallinethickness1}}
+    \def\verticallinethickness{\factor * \getcornermetadata{\fbcorner}{verticallinethickness1}}
+
+    \ifthenelse{\NOT \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+    {
+      \def\offsetxsecond{\factor * \getcornermetadata{\fbcorner}{offsetx2}}
+      \def\offsetysecond{\factor * \getcornermetadata{\fbcorner}{offsety2}}
+
+      \def\horizontallinethicknesssecond{\factor * \getcornermetadata{\fbcorner}{horizontallinethickness2}}
+      \def\verticallinethicknesssecond{\factor * \getcornermetadata{\fbcorner}{verticallinethickness2}}
+    }
+    {}
+
+    \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{diagonal}}
+    {
+      \node[anchor=north west, inner sep=0pt]
+        (cornernorthwest) at (northwest)
+        {\includegraphics[width=\fbcornersize]{\nwcorner}};
+      \node[anchor=south east, inner sep=0pt]
+        (cornersoutheast)at (southeast)
+        {\adjustbox{scale={-1}{-1}}
+        {\includegraphics[width=\fbcornersize]{\secorner}}};
+
+      \coordinate (toplinestart) at
+      ($(cornernorthwest.north east) + (\extrax, 0)$);
+      \coordinate (leftlinestart) at ($(cornernorthwest.south west) - (0, \extray)$);
+      \coordinate (bottomlineend) at ($(cornersoutheast.south west) - (\extrax, 0)$);
+      \coordinate (rightlineend) at ($(cornersoutheast.north east) + (0, \extray)$);
+
+      \ifthenelse{\NOT
+        \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+      {
+        \coordinate (toplinestartsecond) at
+        ($(cornernorthwest.north east) + (\extrax, 0)$);
+        \coordinate (leftlinestartsecond) at ($(cornernorthwest.south west) - (0, \extray)$);
+        \coordinate (bottomlineendsecond) at ($(cornersoutheast.south west) - (\extrax, 0)$);
+        \coordinate (rightlineendsecond) at ($(cornersoutheast.north east) + (0, \extray)$);
+      }
+      {}
+    }
+    {
+      \node (cornernorthwest)
+        [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at
+        (northwest) {};
+      \node (cornersoutheast)
+        [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at
+        (southeast) {};
+
+      \coordinate (toplinestart) at
+      ($(northwest) + (\offsetx, 0) + (0.2pt, 0) $);
+      \coordinate (leftlinestart) at
+      ($(northwest) - (0, \offsety) - (0, 0.2pt)$);
+      \coordinate (bottomlineend) at
+      ($(southeast) - (\offsetx, 0) - (0.2pt, 0)$);
+      \coordinate (rightlineend) at
+      ($(southeast) + (0, \offsety) + (0, 0.2pt)$);
+
+      \ifthenelse{\NOT
+        \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+      {
+        \coordinate (toplinestartsecond) at
+        ($(northwest) + (\offsetxsecond, 0) + (0.2pt, 0) $);
+        \coordinate (leftlinestartsecond) at
+        ($(northwest) - (0, \offsetysecond) - (0, 0.2pt)$);
+        \coordinate (bottomlineendsecond) at
+        ($(southeast) - (\offsetxsecond, 0) - (0.2pt, 0)$);
+        \coordinate (rightlineendsecond) at
+        ($(southeast) + (0, \offsetysecond) + (0, 0.2pt)$);
+      }
+      {}
+    }
+
+    \ifthenelse{\equal{\fbmode}{full} \OR \equal{\fbmode}{antidiagonal}}
+    {
+      \node[anchor=north east, inner sep=0pt]
+        (cornernortheast) at (northeast)
+        {\adjustbox{scale={-1}{1}}
+        {\includegraphics[width=\fbcornersize]{\necorner}}};
+      \node[anchor=south west, inner sep=0pt]
+        (cornersouthwest)at (southwest)
+        {\adjustbox{scale={1}{-1}}
+        {\includegraphics[width=\fbcornersize]{\swcorner}}};
+
+      \coordinate (toplineend) at
+      ($(cornernortheast.north west) - (\extrax, 0)$);
+      \coordinate (rightlinestart) at
+      ($(cornernortheast.south east) - (0, \extray)$);
+      \coordinate (bottomlinestart) at
+      ($(cornersouthwest.south east) + (\extrax, 0)$);
+      \coordinate (leftlineend) at
+      ($(cornersouthwest.north west) + (0, \extray)$);
+
+      \ifthenelse{\NOT
+        \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+      {
+        \coordinate (toplineendsecond) at
+        ($(cornernortheast.north west) - (\extrax, 0)$);
+        \coordinate (rightlinestartsecond) at
+        ($(cornernortheast.south east) - (0, \extray)$);
+        \coordinate (bottomlinestartsecond) at
+        ($(cornersouthwest.south east) + (\extrax, 0)$);
+        \coordinate (leftlineendsecond) at
+        ($(cornersouthwest.north west) + (0, \extray)$);
+      }
+      {}
+    }
+    {
+      \node (cornernortheast)
+        [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at
+        (northeast) {};
+      \node (cornersouthwest)
+        [minimum size=0pt, inner sep=0pt, outer sep=0pt, opacity=0] at
+        (southwest) {};
+
+      \coordinate (toplineend) at
+      ($(northeast) - (\offsetx, 0) - (0.2pt, 0)$);
+      \coordinate (rightlinestart) at
+      ($(northeast) - (0, \offsety) - (0, 0.2pt)$);
+      \coordinate (bottomlinestart) at
+      ($(southwest) + (\offsetx, 0) + (0.2pt, 0)$);
+      \coordinate (leftlineend) at
+      ($(southwest) + (0, \offsety) + (0, 0.2pt)$);
+
+      \ifthenelse{\NOT
+        \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+      {
+        \coordinate (toplineendsecond) at
+        ($(northeast) - (\offsetxsecond, 0) - (0.2pt, 0)$);
+        \coordinate (rightlinestartsecond) at
+        ($(northeast) - (0, \offsetysecond) - (0, 0.2pt)$);
+        \coordinate (bottomlinestartsecond) at
+        ($(southwest) + (\offsetxsecond, 0) + (0.2pt, 0)$);
+        \coordinate (leftlineendsecond) at
+        ($(southwest) + (0, \offsetysecond) + (0, 0.2pt)$);
+      }
+      {}
+    }
+
+    \ifthenelse{\equal{\fblines}{all} \OR \equal{\fblines}{2} \OR \equal{\fblines}{1}}
+    {
+      % top line
+      \draw[line width={\horizontallinethickness}]
+        ([yshift={- \offsety - \horizontallinethickness / 2 - 0.2pt}] toplinestart) --
+        ([yshift={- \offsety - \horizontallinethickness / 2 - 0.2pt}] toplineend);
+
+      % bottom line
+      \draw[line width={\horizontallinethickness}]
+        ([yshift={\offsety + \horizontallinethickness / 2 + 0.2pt}] bottomlinestart) --
+        ([yshift={\offsety + \horizontallinethickness / 2 + 0.2pt}] bottomlineend);
+
+      % left line
+      \draw[line width={\verticallinethickness}]
+        ([xshift={\offsetx + \verticallinethickness / 2 + 0.2pt}] leftlinestart) --
+        ([xshift={\offsetx + \verticallinethickness / 2 + 0.2pt}] leftlineend);
+
+      % right line
+      \draw[line width={\verticallinethickness}]
+        ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlinestart) --
+        ([xshift={- \offsetx - \verticallinethickness / 2 - 0.2pt}] rightlineend);
+    }
+    {}
+
+    \ifthenelse{\NOT \equal{\getcornermetadata{\fbcorner}{horizontallinethickness2}}{0}}
+    {
+      \ifthenelse{\equal{\fblines}{all} \OR \equal{\fblines}{2}}
+      {
+        % top line
+        \draw[line width={\horizontallinethicknesssecond}]
+          ([yshift={- \offsetysecond - \horizontallinethicknesssecond / 2 - 0.2pt}] toplinestartsecond) --
+          ([yshift={- \offsetysecond - \horizontallinethicknesssecond / 2 - 0.2pt}] toplineendsecond);
+
+        % bottom line
+        \draw[line width={\horizontallinethicknesssecond}]
+          ([yshift={\offsetysecond + \horizontallinethicknesssecond / 2 + 0.2pt}] bottomlinestartsecond) --
+          ([yshift={\offsetysecond + \horizontallinethicknesssecond / 2 + 0.2pt}] bottomlineendsecond);
+
+        % left line
+        \draw[line width={\verticallinethicknesssecond}]
+          ([xshift={\offsetxsecond + \verticallinethicknesssecond / 2 + 0.2pt}] leftlinestartsecond) --
+          ([xshift={\offsetxsecond + \verticallinethicknesssecond / 2 + 0.2pt}] leftlineendsecond);
+
+        % right line
+        \draw[line width={\verticallinethicknesssecond}]
+          ([xshift={- \offsetxsecond - \verticallinethicknesssecond / 2 - 0.2pt}] rightlinestartsecond) --
+          ([xshift={- \offsetxsecond - \verticallinethicknesssecond / 2 - 0.2pt}] rightlineendsecond);
+      }
+      {}
+    }
+    {}
+
+    \node[text width={\fbwidth-2*\fbpadding},
+      minimum height={\fbheight-2*\fbpadding},
+      inner sep=0pt,
+      align=center]
+    (content) at (\fbwidth/2, \fbheight/2) {#2};
+
+ \end{tikzpicture}
+}
+
+\pgfkeys{/framedbox/.cd,
+  width/.store in=\fbwidth,
+  width=5cm, % Default width
+  height/.store in=\fbheight,
+  height=4cm, % Default height
+  cornersize/.store in=\fbcornersize,
+  cornersize=0.5cm,
+  corner/.store in=\fbcorner,
+  corner=style01,
+  mode/.store in=\fbmode,
+  mode=full,
+  lines/.store in=\fblines,
+  lines=all,
+  padding/.store in=\fbpadding,
+  padding=0,
+}
