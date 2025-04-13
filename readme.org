@@ -9,6 +9,9 @@ Required $\LaTeX$ packages:
 
 ** Usage
 TBD
+** Styles
+Styles can be seen in [[file:./styles.pdf][this PDF]] or as an image here:
+[[file:./styles.png]]
 
 ** Attribution
 I've found various corners online, but that was quite a while ago. The
