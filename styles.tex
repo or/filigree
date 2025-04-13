@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+\usepackage{forloop}
+\usepackage[margin=1cm]{geometry}
+\pagestyle{empty}
+
+\input{./filigree.tex}
+
+\begin{document}%
+\newcounter{colctr}
+\setcounter{colctr}{0}
+\newcounter{loopctr}%
+\forloop{loopctr}{1}{\value{loopctr} < 37}{%
+  \hfill%
+  \ifnum\value{loopctr}<10%
+    \def\style{style0\theloopctr}%
+  \else%
+    \def\style{style\theloopctr}%
+  \fi%
+  \begin{minipage}{0.30\textwidth}%
+    \framedbox[width=5cm, height=3cm, corner=\style, cornersize=1cm, mode=full,
+    lines=2]{\style}%
+  \end{minipage}%
+  \stepcounter{colctr}%
+  \ifnum\value{colctr} = 3%
+    \par\vspace{1em}%
+    \setcounter{colctr}{0}%
+  \else
+    \hfill%
+  \fi
+}
+
+\end{document}
