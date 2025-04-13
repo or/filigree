@@ -9,10 +9,10 @@
 
 \pdfsuppresswarningpagegroup=1
 
-\NewDocumentCommand{\framedbox}{ O{} m }{%
+\NewDocumentCommand{\filibox}{ O{} m }{%
 
   \begin{tikzpicture}
-    \pgfkeys{/framedbox/.cd, #1} % Set the keys based on the optional argument
+    \pgfkeys{/filibox/.cd, #1} % Set the keys based on the optional argument
 
     \coordinate (northwest) at (0, \fbheight);
     \coordinate (northeast) at (\fbwidth, \fbheight);
@@ -231,7 +231,7 @@
  \end{tikzpicture}
 }
 
-\pgfkeys{/framedbox/.cd,
+\pgfkeys{/filibox/.cd,
   width/.store in=\fbwidth,
   width=5cm, % Default width
   height/.store in=\fbheight,
