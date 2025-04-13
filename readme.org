@@ -8,7 +8,38 @@ Required $\LaTeX$ packages:
 - ~ifthen~
 
 ** Usage
-TBD
+1. Include ~filigree.tex~ in your document:
+   #+begin_src latex
+\input{./filigree.tex}
+   #+end_src
+2. Use the ~\filibox~ macro:
+   #+begin_src latex
+\filibox[width=6cm, height=4cm, corner=style-single-3, cornersize=1cm, mode=full, lines=1]
+  {Your content...}
+   #+end_src
+*** Options
+- ~width~ :: The width of the box. Default: ~5cm~.
+- ~height~ :: The height of the box. Default: ~4cm~.
+- ~cornersize~ :: The width of the corner piece. Default: ~0.5cm~. Note: some
+  corners are intended to be smaller, which also results in thicker lines, when
+  they are scaled up. For those it usually is more visually pleasing to reduce
+  this size.
+- ~corner~ :: The style of the corners, see style overview below. Default: ~style-double-02~.
+- ~mode~ :: The mode of corner inclusion, valid values are:
+  - ~full~ :: all four corners
+  - ~diagonal~ :: the top left and bottom right corners
+  - ~antidiagonal~ :: the top right and bottom left corners
+  Default: ~full~.
+- ~lines~ :: The number of lines to draw, valid values are:
+  - ~all~ :: 2 lines if the corner style supports them, otherwise 1
+  - ~2~ :: 2 lines if the corner style supports them, otherwise
+  - ~1~ :: 1 line
+  - ~0~ :: no lines
+  Default: ~all~. Note: by default there's always a line, even for the
+  ~style-none-*~ styles, unless you explicitly specify ~lines=0~.
+- ~padding~ :: Horizontal and vertical padding of the content box, e.g. ~0.2cm~.
+  This is useful in particular because the corners and borders are included in
+  the width/height. Default: ~0~.
 ** Styles
 Styles can be seen in [[file:./styles.pdf][this PDF]] or as an image here:
 [[file:./styles.png]]
