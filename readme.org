@@ -42,7 +42,7 @@ Required $\LaTeX$ packages:
   the width/height. Default: ~0~.
 ** Styles
 Styles can be seen in [[file:./styles.pdf][this PDF]] or as an image here:
-[[file:./styles.png]]
+[[file:./styles-preview.png]]
 
 ** Attribution
 I've found various corners online, but that was quite a while ago. The
@@ -51,3 +51,9 @@ use, but see the license on that site for details.
 
 If you know the source for other corners, then please let me know, so I can
 properly attribute them as well.
+
+** Development
+*** Generate ~styles.png~
+#+begin_src shell
+magick -density 150 styles.pdf -background white -flatten styles-preview.png
+#+end_src
