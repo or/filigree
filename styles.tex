@@ -2,31 +2,135 @@
 \usepackage{forloop}
 \usepackage[margin=1cm]{geometry}
 \pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\geometry{papersize={210mm, 1330mm}}
 
 \input{./filigree.tex}
 
 \begin{document}%
-\newcounter{colctr}
-\setcounter{colctr}{0}
+\section{Styles}
+
+\subsection{No border}
+Corners without a border line. You can still use a single line with them, but
+that might look better for some than for others.
+
+\par\vspace{1em}%
+
 \newcounter{loopctr}%
-\forloop{loopctr}{1}{\value{loopctr} < 37}{%
+\forloop{loopctr}{1}{\value{loopctr} < 17}{%
   \hfill%
   \ifnum\value{loopctr}<10%
-    \def\style{style0\theloopctr}%
+    \def\style{style-none-0\theloopctr}%
   \else%
-    \def\style{style\theloopctr}%
+    \def\style{style-none-\theloopctr}%
   \fi%
-  \begin{minipage}{0.30\textwidth}%
-    \framedbox[width=5cm, height=3cm, corner=\style, cornersize=1cm, mode=full,
-    lines=2]{\style}%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=full,
+    lines=0]{\style, \\
+      mode=full, \\
+      lines=0}%
   \end{minipage}%
-  \stepcounter{colctr}%
-  \ifnum\value{colctr} = 3%
-    \par\vspace{1em}%
-    \setcounter{colctr}{0}%
-  \else
-    \hfill%
-  \fi
+  \hfill%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=full,
+    lines=1]{\style, \\
+      mode=full, \\
+      lines=1}%
+  \end{minipage}%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=diagonal,
+    lines=1]{\style, \\
+      mode=diagonal, \\
+      lines=1}%
+  \end{minipage}%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=antidiagonal,
+    lines=0]{\style, \\
+      mode=antidiagonal, \\
+      lines=0}%
+  \end{minipage}%
+  \par\vspace{1em}%
+}
+
+\subsection{Single border}
+Corners with one border line. You can also use them without a line.
+
+\par\vspace{1em}%
+
+\forloop{loopctr}{1}{\value{loopctr} < 10}{%
+  \hfill%
+  \ifnum\value{loopctr}<10%
+    \def\style{style-single-0\theloopctr}%
+  \else%
+    \def\style{style-single-\theloopctr}%
+  \fi%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=full,
+    lines=1]{\style, \\
+      mode=full, \\
+      lines=1}%
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=full,
+    lines=0]{\style, \\
+      mode=full, \\
+      lines=0}%
+  \end{minipage}%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=diagonal,
+    lines=1]{\style, \\
+      mode=diagonal, \\
+      lines=1}%
+  \end{minipage}%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=antidiagonal,
+    lines=0]{\style, \\
+      mode=antidiagonal, \\
+      lines=0}%
+  \end{minipage}%
+  \par\vspace{1em}%
+}
+
+\subsection{Double border}
+Corners with two border lines. You can also use them with one line or no lines.
+
+\par\vspace{1em}%
+
+\forloop{loopctr}{1}{\value{loopctr} < 12}{%
+  \hfill%
+  \ifnum\value{loopctr}<10%
+    \def\style{style-double-0\theloopctr}%
+  \else%
+    \def\style{style-double-\theloopctr}%
+  \fi%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=full,
+    lines=2]{\style, \\
+      mode=full, \\
+      lines=2}%
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=full,
+    lines=1]{\style, \\
+      mode=full, \\
+      lines=1}%
+  \end{minipage}%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=diagonal,
+    lines=2]{\style, \\
+      mode=diagonal, \\
+      lines=2}%
+  \end{minipage}%
+  \begin{minipage}{0.24\textwidth}%
+    \framedbox[width=4cm, height=3cm, corner=\style, cornersize=1cm, mode=antidiagonal,
+    lines=1]{\style, \\
+      mode=antidiagonal, \\
+      lines=1}%
+  \end{minipage}%
+  \par\vspace{1em}%
 }
 
 \end{document}
